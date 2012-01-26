@@ -127,7 +127,7 @@ class Controller(object):
             for i in xrange(self.num_sweepers):
                 self.sweepers[i].put_weights(self.population[i].weights)
                 self.sweepers[i].reset()
-    
+
     def render(self):
         fs = map(MineSweeperFigure, self.sweepers)
         fs = []
