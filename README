@@ -99,7 +99,10 @@ main.py
 	invoking a Controller instance's functions to update and render the world. 
 
 resources/
-        Currently contains the icon I ripped from Fup's code(that was originally in 
+	Currently contains the icon I ripped from Fup's code(that was originally in 
         .ico format, I made a GIF of it - hopefully not offending anyone).
 
+TODO: 	(i) Any improvement in performance
+	(ii) Make the code conform to PyLint conventions 
+	    (currently the score is really bad!).
 

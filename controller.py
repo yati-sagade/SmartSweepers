@@ -106,6 +106,10 @@ class Controller(object):
         
     
     def update(self):
+        '''
+        Walks through the list of sweepers, checking whether a mine has been
+        swept. If yes, update the fitness.
+        '''
         if self.ticks < NUM_TICKS:
             self.ticks += 1
             for i in xrange(self.num_sweepers):
@@ -115,8 +119,10 @@ class Controller(object):
                                                            MINE_SCALE)
                 if grab_hit >= 0:
                     self.sweepers[i].inc_fitness()
-                    self.mines[grab_hit].position = Vector2D(random() * WINDOW_WIDTH,
-                                                             random() * WINDOW_HEIGHT)
+                    self.mines[grab_hit].position = Vector2D(
+                                                        random() * WINDOW_WIDTH,
+                                                        random() * WINDOW_HEIGHT
+                                                        )
                     self.population[i].fitness = self.sweepers[i].fitness
                 
         else:
@@ -129,18 +135,23 @@ class Controller(object):
                 self.sweepers[i].reset()
 
     def render(self):
-        fs = map(MineSweeperFigure, self.sweepers)
-        fs = []
+        '''
+        The main rendering method.
+        '''
+        f_sweepers = []
         i = 0
-        for sweeper in self.sweepers:
+        for sweeper in sorted(self.sweepers, 
+                              key=lambda x: x.fitness, 
+                              reverse=True):
+            # Paint the fittest sweepers green.
             color = (0,255,0) if i < NUM_ELITE else None
-            fs.append(MineSweeperFigure(sweeper, color))
+            f_sweepers.append(MineSweeperFigure(sweeper, color))
             i += 1
          
-        fm = map(MineFigure, self.mines)
-        self.screen.fill((0,0,0))
-        map(lambda x: x.draw(self.screen), fs)
-        map(lambda x: x.draw(self.screen), fm)
+        f_mines = map(MineFigure, self.mines)
+        self.screen.fill(BACKGROUND_COLOUR)
+        map(lambda x: x.draw(self.screen), f_sweepers)
+        map(lambda x: x.draw(self.screen), f_mines)
         pygame.display.flip()
             
             
