@@ -5,10 +5,13 @@ Created on Jan 25, 2012
 '''
 import math
 import copy
-from numpy import matrix
 from math import sin, cos
-
+#------------------------------------------------------------------------------ 
 class Matrix2D(list):
+    '''
+    small, compact matrix class that implements the things needed for basic
+    rendering.
+    '''
     class MatrixError(Exception):
         pass
     
@@ -35,7 +38,7 @@ class Matrix2D(list):
         
         return self.__class__(result)
     
-
+#------------------------------------------------------------------------------ 
 class Vector2D(object):
     '''
     A simple 2D vector class.
@@ -46,9 +49,15 @@ class Vector2D(object):
         
     # Now, some operator overloading
     def __add__(self, another):
+        '''
+        vector addition
+        '''
         return self.__class__(self.x + another.x, self.y + another.y)
     
     def __sub__(self, another):
+        '''
+        subtraction of two vectors
+        '''
         return self.__class__(self.x - another.x, self.y - another.y)
     
     def __mul__(self, rhs):
@@ -59,19 +68,34 @@ class Vector2D(object):
         return self.__class__(self.x * rhs, self.y * rhs)
     
     def __div__(self, rhs):
+        '''
+        overload the division operator '/' for division by a scalar
+        '''
         return self.__class__(self.x / rhs, self.y / rhs)
     
     def length(self):
+        '''
+        returns the length of this vector using the 2 point distance formula
+        '''
         return math.sqrt(self.x * self.x + self.y * self.y)
     
     def get_normalized(self):
+        '''
+        returns the normalized vector in this direction
+        '''
         return self / self.length()
     
     def normalize(self):
+        '''
+        normalizes self - modifies the object!
+        '''
         self.x /= self.length()
         self.y /= self.length()
         
     def dot(self, another):
+        '''
+        dot product with another vector.
+        '''
         return self.x * another.x + self.y * another.y
     
     def sign(self, another):
@@ -88,13 +112,25 @@ class Vector2D(object):
     
     def __str__(self):
         return self.__repr__()
-
-
+#------------------------------------------------------------------------------ 
 class PointList(Matrix2D):
+    '''
+    A class to represent a set of normalized co-ordinates as a matrix. For
+    example, the points {(0,0), (1,2), (-1, 2.75)} are represented as
+    
+    /             \
+    |  0   0   1  |
+    |  1   2   1  |
+    | -1  2.75 1  |
+    \             /
+    
+    Where the 3rd element in every row is the h' parameter chosen be default
+    to be 1.
+    ''' 
     def __init__(self, points, hprime=1):
         '''
         ctor: takes a list of points - each of which is a tuple of the form 
-        (x,y) and returns a numpy matrix with each row representing each 
+        (x,y) and returns an object with each row representing each 
         *normalized* co-ordinate, of the form (x, y, 1) - where h' has been 
         chosen to be 1.
         '''
@@ -140,6 +176,12 @@ class PointList(Matrix2D):
         return self * R
     
     def scale(self, scale_factors):
+        '''
+        2-D scaling.
+        scale_factors should be a tuple of 2 elements of the form (sx, sy) where
+        sx and sy represent the scale-factors in X and Y directions, 
+        respectively.
+        '''
         sx, sy = scale_factors
         S = Matrix2D([[sx,  0,  0],
                       [ 0, sy,  0],
@@ -148,5 +190,9 @@ class PointList(Matrix2D):
         return self * S 
     
     def points(self):
+        '''
+        returns a list of points, each represented as an (x,y) tuple. Note that
+        internally, normalized co-ordinates of the form (x, y, 1) are used.
+        '''  
         return [point[:2] for point in self]
     

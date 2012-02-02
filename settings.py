@@ -1,11 +1,10 @@
 '''
 Created on Jan 23, 2012
-
+settings.py
+The main settings module. Play around with these settings to get real fruit.
 @author: yati
 '''
 MY_NAME = 'SmartSweepers version Py'
-
-FRAMES_PER_SECOND = 60
 
 NUM_INPUTS = 4
 

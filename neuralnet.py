@@ -1,10 +1,11 @@
 '''
 Created on Dec 30, 2011
-
+neuralnet.py
+The main "brains" module. Defines the Neuron, NeuronLayer and NeuralNet classes
 @author: yati
 '''
 from utils import clamped_rand, sigmoid
-
+#------------------------------------------------------------------------------ 
 class Neuron(object):
     '''The neuron class'''
     def __init__(self, num_inputs, weights=None):
@@ -30,8 +31,7 @@ class Neuron(object):
         output += bias * self.weights[-1]
         
         return output
-    
-
+#------------------------------------------------------------------------------ 
 class NeuronLayer(list):
     '''encapsulates a Neuron Layer'''
     def __init__(self, num_neurons, num_inputs_per_neuron):
@@ -53,7 +53,7 @@ class NeuronLayer(list):
             outputs.append(res)
         
         return outputs
-    
+#------------------------------------------------------------------------------ 
 class NeuralNet(list):
     '''The main net class - also a list subclass like NeuronLayer.'''
     def __init__(self, num_inputs, num_outputs, num_hidden, neurons_per_hidden):
@@ -116,7 +116,4 @@ class NeuralNet(list):
                 ret += neuron.num_inputs
         
         return ret
-    
-                    
-        
-            
+#------------------------------------------------------------------------------ 

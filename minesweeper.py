@@ -1,6 +1,7 @@
 '''
 Created on Jan 24, 2012
-
+minesweeper.py
+Defines the Mine and MineSweeper classes
 @author: yati
 '''
 import math

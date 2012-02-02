@@ -5,14 +5,14 @@ Created on Jan 25, 2012
 '''
 import pygame
 from geom2D import Vector2D, PointList
-from genetic_algorithm import GenAlg, Genome
+from genetic_algorithm import GenAlg
 from settings import *
 from minesweeper import Mine, MineSweeper
 from random import random
 
-
+#------------------------------------------------------------------------------ 
 pygame.init()
-
+#------------------------------------------------------------------------------ 
 # This is is the geometry of a minesweeper about the origin. Easy to trace out with
 # a pen and a paper, and easier to see if you run the code :)
 MINESWEEPER_VERTICES = PointList(
@@ -35,6 +35,7 @@ MINESWEEPER_VERTICES = PointList(
                                   (-0.5, -1)
                                 )
                             )
+#------------------------------------------------------------------------------ 
 # And, of course, the mines.
 MINE_VERTICES = PointList((
                           (-1, -1),
@@ -42,7 +43,7 @@ MINE_VERTICES = PointList((
                           ( 1,  1),
                           ( 1, -1),
                  )) 
-
+#------------------------------------------------------------------------------ 
 # Do I really miss "pure" abstract classes in PythonLand? Don't think so.
 class BaseShape(object):
     def draw(self, screen):
@@ -50,7 +51,7 @@ class BaseShape(object):
                                    self.color,
                                    True,
                                    self.vertices.points())
-        
+#------------------------------------------------------------------------------ 
 class MineSweeperFigure(BaseShape):
     def __init__(self, minesweeper, color=None):
         self.vertices = (MINESWEEPER_VERTICES
@@ -63,7 +64,7 @@ class MineSweeperFigure(BaseShape):
             self.color = (0, 0, 255) # blue
         else:
             self.color = color
-
+#------------------------------------------------------------------------------ 
 class MineFigure(BaseShape):
     def __init__(self, mine, color=None):
         self.vertices = (MINE_VERTICES
@@ -74,7 +75,7 @@ class MineFigure(BaseShape):
             self.color = (255, 0, 0) # red 
         else:
             self.color = color
-
+#------------------------------------------------------------------------------ 
 class Controller(object):
     '''
     The controller class.
@@ -153,7 +154,7 @@ class Controller(object):
         map(lambda x: x.draw(self.screen), f_sweepers)
         map(lambda x: x.draw(self.screen), f_mines)
         pygame.display.flip()
-            
+#------------------------------------------------------------------------------ 
             
                          
                          

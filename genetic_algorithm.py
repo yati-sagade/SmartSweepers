@@ -1,6 +1,10 @@
 '''
 Created on Dec 30, 2011
 
+genetic_algorithm.py
+The Genetic Algorithm module. Implements the class GenAlg and supporting 
+data structures.
+
 @author: yati
 '''
 from utils import sigmoid, clamped_rand, INFINITY
