@@ -11,8 +11,6 @@ Mail: yati dot sagade at gmail dot com      |
 
 ![screenshot](https://raw.githubusercontent.com/yati-sagade/SmartSweepers/master/smartsweepers.png)
 
-![Image of Yaktocat](https://octodex.github.com/images/yaktocat.png)
-
 
 This is my take on the classic example of the workings of an 
 Artificial Neural Network, originally found at http://www.ai-junkie.com/
